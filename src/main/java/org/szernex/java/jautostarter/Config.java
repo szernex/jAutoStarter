@@ -113,5 +113,6 @@ class StartSetting {
 	String name = "ExampleApplication";
 	long delayBefore = 1000;
 	long delayAfter = 1000;
+	String workingDirectory = "";
 	List<String> startArgs = new LinkedList<>();
 }

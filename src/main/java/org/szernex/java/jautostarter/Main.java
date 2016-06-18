@@ -24,6 +24,7 @@ SOFTWARE.
 
 package org.szernex.java.jautostarter;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 
@@ -65,7 +66,14 @@ public class Main {
 
 		try {
 			System.out.println("-- Starting application: " + String.join(" ", setting.startArgs));
-			new ProcessBuilder(setting.startArgs).start();
+			ProcessBuilder builder = new ProcessBuilder(setting.startArgs);
+
+			if (!setting.workingDirectory.isEmpty()) {
+				System.out.println("-- Working directory: " + setting.workingDirectory);
+				builder.directory(new File(setting.workingDirectory));
+			}
+
+			builder.start();
 		} catch (IOException e) {
 			System.err.println("-- Error starting " + setting.name + ": " + e.getMessage());
 			e.printStackTrace();
