@@ -24,14 +24,18 @@ SOFTWARE.
 
 package org.szernex.java.jautostarter;
 
+import org.szernex.java.jsonconfig.JsonConfig;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 
 public class Main {
+	private static JsonConfig<MyConfigObject> jsonConfig = new JsonConfig<>(MyConfigObject.class);
+
 	public static void main(String[] args) {
 		System.out.println("Loading config");
-		ConfigObject config = Config.load(Paths.get(R.CONFIG_FILE));
+		MyConfigObject config = jsonConfig.load(Paths.get(R.CONFIG_FILE));
 
 		if (config == null) {
 			System.out.println("Failed to load config");
@@ -42,7 +46,7 @@ public class Main {
 
 		if (config.startSettings.size() == 0) {
 			config.startSettings.add(new StartSetting());
-			Config.save(config, Paths.get(R.CONFIG_FILE));
+			jsonConfig.save(config, Paths.get(R.CONFIG_FILE));
 			System.out.println("Empty config detected. Wrote example config to " + R.CONFIG_FILE + ". Please add settings there.");
 			return;
 		}

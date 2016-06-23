@@ -1,5 +1,5 @@
 group 'org.szernex.java'
-version '0.0.1'
+version '0.0.2'
 
 apply plugin: 'java'
 
@@ -7,10 +7,12 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 dependencies {
     compile 'com.google.code.gson:gson:2.6.2'
+    compile 'org.szernex.java:JsonConfig:0.0.1'
 }
 
 jar {
